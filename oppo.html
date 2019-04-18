@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 500px;
+            float: left;
+        }
+        #app1 {
+            background: cyan;
+        }
+        #app2{
+            background: orange;
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app1">
+        <img draggable="true" 
+        ondragstart="drag(event)"
+        id="dragImg"
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547179609181&di=fce91a938096c1bd397ff72a076fec99&imgtype=0&src=http%3A%2F%2Fpic27.nipic.com%2F20130225%2F4746571_081826094000_2.jpg" alt="">
+        <p>
+            hell world
+        </p>
+    </div>
+    <div id="app2" ondrop="drop(event)" ondragover="allowDrog(event)"></div>
+</body>
+</html>
+<script>
+    // 放下的操作
+    function drop(event){
+        var event = event||window.event;
+        //取消默认事件
+        event.preventDefault();
+        // 获取存储在dataTransfer里的元素的id
+        var data = event.dataTransfer.getData("data");
+        // console.log(event);
+        // 根据在dataTransfer里存储的id获取元素,并且将该元素插入到目标元素的列表的末尾
+        event.target.appendChild(document.getElementById(data));
+
+    }
+    // 允许放下
+    function allowDrog(event){
+        var event = event||window.event;
+        event.preventDefault();
+    }
+    //拖拽
+    function drag(event){
+        var event = event||window.event;
+        console.log(event.target.id);
+        event.dataTransfer.setData("data",event.target.id);
+    }
+</script>
